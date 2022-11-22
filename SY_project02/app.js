@@ -7,6 +7,7 @@ const session = require("express-session");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
 const passport = require("passport");
+const test = require("./routes/test");
 
 dotenv.config({ path: path.join(__dirname, "/.env") });
 
@@ -15,7 +16,7 @@ dotenv.config({ path: path.join(__dirname, "/.env") });
  *
  *
  */
-const { sequelize } = require("./models");
+// const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 
 const app = express();
@@ -28,23 +29,15 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
-app.get("/", (req, res) => {
-  res.send({ message: "hello" });
-});
 
-app.post("/id", (req, res) => {
-  const serverId = req.body.id;
-  console.log(serverId);
-});
-
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log("DB Connected");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+// sequelize
+//   .sync({ alter: false, force: false })
+//   .then(() => {
+//     console.log("DB Connected");
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -72,6 +65,13 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use("/", test);
+app.use("/api", test);
+app.use("/test", test);
+app.use("/login", test);
+app.use("/users", test);
+app.use("/*", test);
 
 app.use((err, req, res, next) => {
   res.locals.message = err.message;

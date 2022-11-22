@@ -1,39 +1,23 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { getReq } from "../util/axios-bearer";
+import AxiosInstance from "../util/Axios";
 
 export const Test = () => {
   const [name, setName] = useState("");
 
-  const sendRequest = async () => {
-    await axios
-      .get("http://localhost:8000/")
-      .then((res) => console.log(res));
-  };
   const handleChange = (e) => {
     setName(e.target.value);
   };
 
-  useEffect(() => {
-    sendRequest();
-  }, []);
-
-  const submitId = () => {
-    const post = {
-      id: name,
-    };
-    axios("http://localhost:8000", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(post),
-    });
-  };
+  AxiosInstance.createInstance().get(`/test`);
 
   return (
     <div>
       <input onChange={handleChange} name="id" />
-      <button onClick={submitId}>Submit</button>
+      <Link to="/">
+        <button>to main</button>
+      </Link>
       <h1>{name}</h1>
     </div>
   );
