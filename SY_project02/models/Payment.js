@@ -21,7 +21,7 @@ module.exports = class Payment extends Sequelize.Model {
           allowNull: false,
         },
         status: {
-          type: Sequelize.BOOLEAN,
+          type: Sequelize.STRING(10),
           allowNull: false,
         },
       },
