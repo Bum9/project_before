@@ -7,21 +7,15 @@ export const Users = () => {
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
-  //   AxiosInstance.createInstance().get(`/users`);
-
   const [loading, response, error] = usePromise(() => {
     return AxiosInstance.createInstance().get(`/users`);
   }, []);
-
   if (loading) {
     <span>Loading...</span>;
   }
-
-  //when it doesn't get response values
   if (!response) {
     return ""; //or null
   }
-  // when it cause some error
   if (error || response.data === null) {
     return alert(
       "페이지를 찾을 수 없어요!",
@@ -40,6 +34,15 @@ export const Users = () => {
 
   return (
     <div>
+      <p>
+        {data.map((x) => (
+          <>
+            <div key={x.id}>
+              {x.id}:{x.username}
+            </div>
+          </>
+        ))}
+      </p>
       <input onChange={handleChange} name="id" />
       <Link to="/">
         <button>to main</button>

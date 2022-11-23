@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getReq } from "../util/axios-bearer";
 import AxiosInstance from "../util/Axios";
 
 export const Test = () => {
@@ -10,7 +9,13 @@ export const Test = () => {
     setName(e.target.value);
   };
 
-  AxiosInstance.createInstance().get(`/test`);
+  const a = AxiosInstance.createInstance().get(`/test`);
+  const getData = async () => {
+    const { data } = await a;
+    console.log(data);
+    return data;
+  };
+  getData();
 
   return (
     <div>

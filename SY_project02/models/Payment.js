@@ -13,7 +13,7 @@ module.exports = class Payment extends Sequelize.Model {
           allowNull: false,
         },
         paymentId: {
-          type: Sequelize.DECIMAL(11, 0).UNSIGNED,
+          type: Sequelize.STRING(100),
           allowNull: false,
         },
         paymentType: {

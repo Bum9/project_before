@@ -10,7 +10,9 @@ export const Main = (props) => {
       <Link to="/test">
         <button>test</button>
       </Link>
-
+      <Link to="/users">
+        <button>users</button>
+      </Link>
       <Link to="/login">
         <button>login</button>
       </Link>

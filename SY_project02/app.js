@@ -16,7 +16,7 @@ dotenv.config({ path: path.join(__dirname, "/.env") });
  *
  *
  */
-// const { sequelize } = require("./models");
+const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 
 const app = express();
@@ -30,14 +30,14 @@ nunjucks.configure("views", {
   watch: true,
 });
 
-// sequelize
-//   .sync({ alter: false, force: false })
-//   .then(() => {
-//     console.log("DB Connected");
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
+sequelize
+  .sync({ alter: false, force: false })
+  .then(() => {
+    console.log("DB Connected");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
