@@ -29,7 +29,7 @@ module.exports = class CartItem extends Sequelize.Model {
     );
   }
   static associate(db) {
-    db.CartItem.hasOne(db.Cart);
-    db.CartItem.belongsTo(db.Product);
+    // db.CartItem.hasOne(db.Cart);
+    // db.CartItem.belongsTo(db.Product);
   }
 };

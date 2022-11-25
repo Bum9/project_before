@@ -1,30 +1,61 @@
 const express = require("express");
 const passport = require("passport");
-const { isLoggedIn, isNotLoggedIn } = require("../middlewares");
+const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 // const bcrypt = require("bcrypt");
-// const User = require("../models/user");
+const User = require("../models/User");
 
 const router = express.Router();
 
-// router.post("/join", isNotLoggedIn, async (req, res, next) => {
-//   const { email, nick, password } = req.body;
+// router.post("/join", async (req, res) => {
+//   res.send({ message: req.data });
+//   console.log(req.body.data, " -------->");
+
+//   const { name, address, password, telephone, email } = req.body.data;
+
 //   try {
-//     const exUser = await User.findOne({ where: { email } });
-//     if (exUser) {
-//       return res.redirect("/join?error=exist");
-//     }
-//     const hash = await bcrypt.hash(password, 12);
-//     await User.create({
+//     // const emailCheck = User.findOne({ where: "a@a.com" });
+
+//     createUser = User.create({
 //       email,
-//       nick,
-//       password: hash,
+//       name,
+//       nickname: "수세미",
+//       password,
+//       telephone,
+//       address,
 //     });
-//     return res.redirect("/");
-//   } catch (error) {
-//     console.error(error);
-//     return next(error);
+
+//     console.log(req.body.data);
+//   } catch {
+//     (error) => {
+//       console.error(error);
+//     };
 //   }
 // });
+// console.log(req);
+// const { email, nick, password } = req.body;
+// try {
+//   const exUser = await User.findOne({ where: { email } });
+//   if (exUser) {
+//     return res.redirect("/join?error=exist");
+//   }
+//   const hash = await bcrypt.hash(password, 12);
+//   await User.create({
+//     email,
+//     nick,
+//     password: hash,
+//   });
+//   return res.redirect("/");
+// } catch (error) {
+//   console.error(error);
+//   return next(error);
+// }
+
+router.get("/join", async (req, res, next) => {
+  const abc = { name: "hello" };
+  const userData = await User.findAll({});
+  console.log(userData);
+  res.send({ data: userData });
+});
 
 router.post("/login", isNotLoggedIn, (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {

@@ -7,7 +7,6 @@ module.exports = class User extends Sequelize.Model {
         email: {
           type: Sequelize.STRING(50),
           allowNull: true,
-          unique: true,
         },
         name: {
           type: Sequelize.STRING(30),
@@ -17,11 +16,11 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.STRING(15),
           allowNull: false,
         },
-        provider: {
-          type: Sequelize.STRING(10),
-          allowNull: false,
-          defaultValue: "local",
-        },
+        // provider: {
+        //   type: Sequelize.STRING(10),
+        //   allowNull: false,
+        //   defaultValue: "local",
+        // },
         snsId: {
           type: Sequelize.STRING(30),
           allowNull: true,

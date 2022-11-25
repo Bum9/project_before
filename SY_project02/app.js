@@ -63,15 +63,18 @@ app.use(
   })
 );
 
+const authRouter = require("./routes/auth");
+const pageRouter = require("./routes/page");
+const shopRouter = require("./routes/shop");
+const testRouter = require("./routes/test");
+
+// app.use("/", indexRoute);
+app.use("/auth", authRouter);
+// app.use("/page", pageRouter);
+app.use("/shop", shopRouter);
+
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use("/", test);
-app.use("/api", test);
-app.use("/test", test);
-app.use("/login", test);
-app.use("/users", test);
-app.use("/*", test);
 
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
